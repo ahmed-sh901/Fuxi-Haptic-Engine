@@ -50,12 +50,9 @@ public final class HapticsEntry implements IXposedHookLoadPackage {
     }
 
     private static void hook(Class<?> owner, String method, Object[] signature, final String label) {
-        Object[] args = new Object[signature.length + 1];
-        args[0] = method;
-        System.arraycopy(signature, 0, args, 1, signature.length);
-        Object[] full = new Object[args.length + 1];
-        System.arraycopy(args, 0, full, 0, args.length);
-        full[args.length] = new XC_MethodHook() {
+        Object[] full = new Object[signature.length + 1];
+        System.arraycopy(signature, 0, full, 0, signature.length);
+        full[signature.length] = new XC_MethodHook() {
             @Override protected void beforeHookedMethod(MethodHookParam p) {
                 int depth = CALL_DEPTH.get();
                 CALL_DEPTH.set(depth + 1);
@@ -74,7 +71,7 @@ public final class HapticsEntry implements IXposedHookLoadPackage {
                 CALL_DEPTH.set(Math.max(0, CALL_DEPTH.get() - 1));
             }
         };
-        XposedHelpers.findAndHookMethod(owner, full);
+        XposedHelpers.findAndHookMethod(owner, method, full);
     }
 
     static void log(String message) {
