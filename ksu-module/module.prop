@@ -1,0 +1,6 @@
+id=fuxi_haptics_engine
+name=Fuxi Haptics Engine
+version=0.5.0-alpha
+versionCode=6
+author=Fuxi Haptics Engine Project
+description=Optional diagnostics wrapper only; LSPosed APK contains opt-in touch, notification and ringtone waveform overrides. No HAL or firmware modifications.

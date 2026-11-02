@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 2,
+  "project": "Fuxi Haptics Engine",
+  "deviceTarget": {
+    "codename": "fuxi",
+    "model": "2211133C",
+    "androidSdk": 36,
+    "hyperOSBuild": "3.0.309.0.WMCCNXM"
+  },
+  "mode": "opt_in_profiles_in_lsposed_apk",
+  "safety": {
+    "allowReplacement": false,
+    "allowCancelOriginal": false,
+    "allowSysfsWrites": false,
+    "allowVendorPropertyWrites": false,
+    "allowFirmwareMounts": false
+  },
+  "defaults": {
+    "enabled": false,
+    "backend": "android_vibration_effect",
+    "fallback": "android_vibration_effect",
+    "maxPatternDurationMs": 5000,
+    "maxEvents": 16,
+    "futureBackend": "Xiaomi MiHaptic / RichTap after Fuxi validation"
+  },
+  "notificationProfiles": {
+    "enabled": false,
+    "matchOrder": [
+      "package+channelId",
+      "package",
+      "default"
+    ],
+    "profiles": {
+      "default": {
+        "pattern": "system_default"
+      },
+      "org.telegram.messenger": {
+        "pattern": "telegram_double_tap"
+      },
+      "com.whatsapp": {
+        "pattern": "whatsapp_single_tick"
+      }
+    }
+  },
+  "ringtoneProfiles": {
+    "enabled": false,
+    "matchOrder": [
+      "contactLookupKey",
+      "phoneAccount",
+      "default"
+    ],
+    "default": {
+      "pattern": "ringtone_sync_default"
+    }
+  },
+  "appProfiles": {
+    "enabled": false,
+    "profiles": {}
+  },
+  "patterns": {
+    "telegram_double_tap": {
+      "backend": "pending_mihaptic_validation",
+      "events": [
+        {
+          "type": "transient",
+          "atMs": 0,
+          "intensity": 65,
+          "sharpness": 75
+        },
+        {
+          "type": "transient",
+          "atMs": 115,
+          "intensity": 65,
+          "sharpness": 75
+        }
+      ]
+    },
+    "whatsapp_single_tick": {
+      "backend": "pending_mihaptic_validation",
+      "events": [
+        {
+          "type": "transient",
+          "atMs": 0,
+          "intensity": 72,
+          "sharpness": 88
+        }
+      ]
+    },
+    "ringtone_sync_default": {
+      "backend": "pending_mihaptic_validation",
+      "sync": "audio_envelope_or_timeline",
+      "events": []
+    }
+  },
+  "runtimeStatus": "reference_template_only_not_consumed_by_v0.5.0",
+  "notes": [
+    "This JSON is a design template only; the v0.5.0 LSPosed APK reads haptic_profiles via LSPosed XSharedPreferences.",
+    "No pattern in this file is applied by the KernelSU shell package.",
+    "All runtime overrides default to disabled."
+  ]
+}
